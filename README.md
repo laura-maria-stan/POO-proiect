@@ -1,4 +1,5 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# POU
+Un joc similar cu Pou, in care cresti un animalut, ii dai de mancare, il speli, il scoti la plimbare, etc.
 
 ### Important!
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar în folder-ul `generated`.
