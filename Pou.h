@@ -143,18 +143,18 @@ class Pou
         }
         void show_food_shop()
         {
-            Food mancare1("cake",40,20,7);
-            this->food_shop.push_back(&mancare1);
-            Food mancare2("soup",15,16,-3);
-            this->food_shop.push_back(&mancare2);
-            Food mancare3("sushi",23,8,5);
-            this->food_shop.push_back(&mancare3);
-            Food mancare4("egg",5,5,1);
-            this->food_shop.push_back(&mancare4);
-            Food mancare5("asparagus",38,18,9);
-            this->food_shop.push_back(&mancare5);
-            Food mancare6("water",5,10,5);
-            this->food_shop.push_back(&mancare6);
+            Food *mancare1=new Food("cake",40,20,7);
+            this->food_shop.push_back(mancare1);
+            Food *mancare2=new Food("soup",15,16,-3);
+            this->food_shop.push_back(mancare2);
+            Food *mancare3=new Food("sushi",23,8,5);
+            this->food_shop.push_back(mancare3);
+            Food *mancare4=new Food("egg",5,5,1);
+            this->food_shop.push_back(mancare4);
+            Food *mancare5=new Food("asparagus",38,18,9);
+            this->food_shop.push_back(mancare5);
+            Food *mancare6=new Food("water",5,10,5);
+            this->food_shop.push_back(mancare6);
             int c=0;
             for(auto const element: food_shop)
             {
@@ -175,7 +175,7 @@ class Pou
                 cin >> nr2;
                 if (nr2 == 1) {
                     const Food* copy(food_shop[nr]);
-                    this->add_to_fridge(copy);
+                    this->add_to_fridge(food_shop[nr]);
                     this->money_Pou -= food_shop[nr]->get_cost();
                     cout << "-" << food_shop[nr]->get_cost() << " pou money\n";
                     //cout<<"you have "<<this->money_Pou<<" pou money left."
