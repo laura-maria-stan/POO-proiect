@@ -25,10 +25,15 @@ class Food
         }
     friend ostream& operator<<(ostream& os, const Food& x)
     {
-        os<<x.name<<" has "<<x.health_effect<<"% health effect, increases satiety by "<<x.hunger_increase<<"% and costs "<<x.cost;
+        os<<x.name<<" has "<<x.health_effect<<"% health effect, increases satiety by "<<x.hunger_increase<<"% and costs "<<x.cost<<" pou money.";
         return os;
     }
     //le am mutat inauntru ca altfel nu mergea
+   string get_name_food() const //un getter!
+    {
+            return this->name;
+    }
+
 };
 //ostream& operator<<(ostream& os, const Food& x)
 //{

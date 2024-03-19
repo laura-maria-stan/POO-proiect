@@ -1,12 +1,13 @@
 #include <iostream>
 #include <array>
+#include <vector>
 
 using namespace std;
 
 //#include <Helper.h>
 //my additions:
 #include "Pou.h"
-class Pou;
+//class Pou;
 
 int main() {
 //    std::cout << "Hello, world!\n";
@@ -61,11 +62,15 @@ int main() {
     
     //my additions:
     Pou pou_baby("Echinoctiu");
+
+
+
+    Food asparagus("asparagus", 13, 10, 2); //aici am folosit constructorul de initializare!
+    pou_baby.add_to_fridge(&asparagus);
+    //am pus "&' ptc trimit adresa lui asparagus de tip Food (dupa ce l am init cu constr de init mai sus). adresa e preluata de some_food care e pointer si devine some_food
+    //pointer catre adresa lui asparagus
     cout<<pou_baby;
-    
-    
-    
-    
+    pou_baby.feeding_Pou();
     
     
     return 0;

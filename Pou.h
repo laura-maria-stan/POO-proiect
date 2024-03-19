@@ -85,13 +85,29 @@ class Pou
             os<<"Pou's name is "<<x.name<<", he is "<<x.age<<" years old, he is a "<<x.size<<" and he has "<<x.money_Pou<<" pou money.";
             os<<" "<<x.general_status<<" ";
             int c=0;
+            cout<<"\nIn the fridge we got:\n";
             for(const Food* element:x.fridge)
             {
                 c++;
-                os<<"food nr "<<c<<":\n";
+                os<<"->food nr "<<c<<": ";
+                os<<element->get_name_food()<<" !!!!\n";
                 os<<*element;
             }
         }
+
+        void add_to_fridge(Food *some_food)
+        {
+            this->fridge.push_back(some_food); //fridge e vector de pointers
+            cout<<"\n"<<some_food->get_name_food()<<" has been added to the fridge!\n";
+        }
+        void feeding_Pou()
+        {
+            cout<<"What would you like to feed Pou?\n";
+           // for(auto element: this->fridge)
+            for(const Food* element:this->fridge)
+                cout<<*element;
+        }
+
 
 };
 //ostream& operator<<(ostream& os, const Pou& x)
