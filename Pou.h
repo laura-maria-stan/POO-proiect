@@ -53,10 +53,19 @@ class Pou
 
                 this->fridge.push_back(ptr_copie_food);
             }
+            for(const Food* elem: obj.food_shop) //!! //aici iteram prin toate alimentele din food shop ul lui obj pt a le copia (acolo e Food* ptc fiecare elem din vector e un pointer)
+            {
+                Food *ptr_copie_food= new Food(*elem);
+                this->fridge.push_back(ptr_copie_food);
+            }
         }
         Pou& operator= (const Pou& y) //??? dc functia "operator=" returneaza de tipul Pou???? nvm
         {
             for(const Food* element:this->fridge)
+            {
+                delete element; //DELETE uieste spre ce pointeaza ptr singur //no memory leaks yipee
+            }
+            for(const Food* element:this->food_shop)
             {
                 delete element; //DELETE uieste spre ce pointeaza ptr singur //no memory leaks yipee
             }
@@ -72,6 +81,14 @@ class Pou
                 //(era gresit daca ziceam doar this->fridge.push_back(elem);) ca copia pointerii si aveam doi pointeri aratand spre aceleasi val deci cand se modif o val se modifica peste tot
 
                 this->fridge.push_back(ptr_copie_food);
+            }
+            for(const Food* elem: y.food_shop) //!! //aici iteram prin toate alimentele din fridge ul lui obj pt a le copia (acolo e Food* ptc fiecare elem din vector e un pointer)
+            {
+                Food *ptr_copie_food= new Food(*elem); //new Food(*elem) apeleaza constructorul de copiere de la Food si creeaza un nou obiect la fel ca val la care pointeaza elem
+                //si returneaza in ptr un pointer catre aceasta copie.
+                //(era gresit daca ziceam doar this->fridge.push_back(elem);) ca copia pointerii si aveam doi pointeri aratand spre aceleasi val deci cand se modif o val se modifica peste tot
+
+                this->food_shop.push_back(ptr_copie_food);
             }
             return *this;
         }
@@ -97,7 +114,7 @@ class Pou
             }
         }
 
-        void add_to_fridge(Food const *some_food)
+        void add_to_fridge( const Food *some_food)
         {
             this->fridge.push_back(some_food); //fridge e vector de pointers
             cout<<"\n"<<some_food->get_name_food()<<" has been added to the fridge!\n";
@@ -109,9 +126,17 @@ class Pou
                 cout<<"\nyour fridge is empty! this is awkward...\n";
                 cout<<"You can add items to your fridge in the Food Shop! :D\n";
             }
+            else
+            { int cc=0;
+                //cout<<*(this->fridge[0]);
+                for(auto element:this->fridge)
+                {
+                    cc++;
+                    cout<<"item "<<cc<<" from fridge is:\n"<<element->get_name_food()<<" "<<element->get_health_effect()<<"\n\n";
+                }
 
-            for(const Food* element:this->fridge)
-                cout<<*element;
+            }
+
             cout<<"Press any number to return to Main!\n\n\n";
             int x;
             cin>>x;
@@ -149,7 +174,8 @@ class Pou
                 cout << "You have selected " << food_shop[nr]->get_name_food() << "\nAre you sure?\nPress 1 for yes, 2 for no.\n";
                 cin >> nr2;
                 if (nr2 == 1) {
-                    this->add_to_fridge(food_shop[nr]);
+                    const Food* copy(food_shop[nr]);
+                    this->add_to_fridge(copy);
                     this->money_Pou -= food_shop[nr]->get_cost();
                     cout << "-" << food_shop[nr]->get_cost() << " pou money\n";
                     //cout<<"you have "<<this->money_Pou<<" pou money left."
