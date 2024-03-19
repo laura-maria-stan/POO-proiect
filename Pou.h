@@ -141,7 +141,7 @@ class Pou
             int x;
             cin>>x;
         }
-        void show_food_shop()
+        void create_food_shop()
         {
             Food *mancare1=new Food("cake",40,20,7);
             this->food_shop.push_back(mancare1);
@@ -155,6 +155,10 @@ class Pou
             this->food_shop.push_back(mancare5);
             Food *mancare6=new Food("water",5,10,5);
             this->food_shop.push_back(mancare6);
+        }
+        void show_food_shop()
+        {
+
             int c=0;
             for(auto const element: food_shop)
             {
@@ -196,6 +200,7 @@ class Pou
         void interfata()
         {
             int x=1;
+            create_food_shop();
             while(x!=4)
             {
                 cout<<"\n\nPress 1 to go to Food Shop!\n";
