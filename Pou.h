@@ -52,7 +52,7 @@ class Pou
                 this->fridge.push_back(ptr_copie_food);
             }
         }
-        Pou& operator= (const Pou& y) //??? dc functia "operator=" returneaza de tipul Pou????
+        Pou& operator= (const Pou& y) //??? dc functia "operator=" returneaza de tipul Pou???? nvm
         {
             for(const Food* element:this->fridge)
             {
