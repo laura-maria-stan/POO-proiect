@@ -1,9 +1,10 @@
 #include <iostream>
 #include <array>
+#include <fstream>
 #include <vector>
 
 using namespace std;
-
+ifstream f("tastatura.txt");
 //#include <Helper.h>
 //my additions:
 #include "Pou.h"
@@ -63,7 +64,8 @@ int main() {
     //my additions:
     string name_pou;
     cout<<"What what would you like to name your Pou?\n";
-    cin>>name_pou;
+    f>>name_pou;
+    cout<<name_pou<<"\n";
     cout<<"weird name but okey\n";
 
     Pou pou_baby(name_pou);

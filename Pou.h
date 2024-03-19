@@ -132,14 +132,14 @@ class Pou
                 for(auto element:this->fridge)
                 {
                     cc++;
-                    cout<<"item "<<cc<<" from fridge is:\n"<<element->get_name_food()<<" "<<element->get_health_effect()<<"\n\n";
+                    cout<<"item "<<cc<<" from fridge is:\n"<<element->get_name_food()<<" (health effect="<<element->get_health_effect()<<")\n\n";
                 }
 
             }
 
             cout<<"Press any number to return to Main!\n\n\n";
             int x;
-            cin>>x;
+            f>>x;
         }
         void create_food_shop()
         {
@@ -174,9 +174,9 @@ class Pou
             while(nr2==1) {
                 cout << "\nPress the number of the item you would like to buy.\n\n\n";
                 int nr;
-                cin >> nr;
+                f >> nr;
                 cout << "You have selected " << food_shop[nr]->get_name_food() << "\nAre you sure?\nPress 1 for yes, 2 for no.\n";
-                cin >> nr2;
+                f >> nr2;
                 if (nr2 == 1) {
                     const Food* copy(food_shop[nr]);
                     this->add_to_fridge(food_shop[nr]);
@@ -184,7 +184,7 @@ class Pou
                     cout << "-" << food_shop[nr]->get_cost() << " pou money\n";
                     //cout<<"you have "<<this->money_Pou<<" pou money left."
                     cout << "Would you like to buy something else? :D\nPress 1 for yes, 2 for no.\n";
-                    cin>>nr2;
+                    f>>nr2;
                 }
                 else
                 {
@@ -208,14 +208,14 @@ class Pou
                 cout<<"Press 3 to see your Bank Account!\n";
                 cout<<"Press 4 to exit the game and abandon your child\n\n\n";
 
-                cin>>x;
+                f>>x;
                 if(x==1)
                 {
 
                     show_food_shop();
                     cout<<"Press any number to return to Main! :D\n\n\n";
                     int x;
-                    cin>>x;
+                    f>>x;
                 }
 
                 else if(x==2)
@@ -228,7 +228,7 @@ class Pou
                         cout << "damn ur a bit too rich how abt giving to the poor\n";
                     cout<<"Press any number to return to Main!\n\n\n";
                     int x;
-                    cin>>x;
+                    f>>x;
                 }
 
             }
