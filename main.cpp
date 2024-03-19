@@ -61,16 +61,21 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////
     
     //my additions:
-    Pou pou_baby("Echinoctiu");
+    string name_pou;
+    cout<<"What what would you like to name your Pou?\n";
+    cin>>name_pou;
+    cout<<"weird name but okey\n";
+
+    Pou pou_baby(name_pou);
+    pou_baby.interfata();
 
 
-
-    Food asparagus("asparagus", 13, 10, 2); //aici am folosit constructorul de initializare!
-    pou_baby.add_to_fridge(&asparagus);
+    //Food asparagus("asparagus", 13, 10, 2); //aici am folosit constructorul de initializare!
+    //pou_baby.add_to_fridge(&asparagus);
     //am pus "&' ptc trimit adresa lui asparagus de tip Food (dupa ce l am init cu constr de init mai sus). adresa e preluata de some_food care e pointer si devine some_food
     //pointer catre adresa lui asparagus
-    cout<<pou_baby;
-    pou_baby.feeding_Pou();
+    //cout<<pou_baby;
+    //pou_baby.show_fridge();
     
     
     return 0;

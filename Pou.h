@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <cstring>
 using namespace std;
 
 
@@ -27,6 +28,7 @@ class Pou
         int money_Pou;
         vector <const Food*> fridge; //aici o sa am un vector de pointeri care pointeaza catre obiecte Food
         //vectorul e automat gol
+        vector <const Food*> food_shop;
     public:
         Pou(const string name_parameter):
         name(name_parameter) //lista de initializare
@@ -95,17 +97,110 @@ class Pou
             }
         }
 
-        void add_to_fridge(Food *some_food)
+        void add_to_fridge(Food const *some_food)
         {
             this->fridge.push_back(some_food); //fridge e vector de pointers
             cout<<"\n"<<some_food->get_name_food()<<" has been added to the fridge!\n";
         }
-        void feeding_Pou()
+        void show_fridge()
         {
-            cout<<"What would you like to feed Pou?\n";
-           // for(auto element: this->fridge)
+            if(this->fridge.size()==0)
+            {
+                cout<<"\nyour fridge is empty! this is awkward...\n";
+                cout<<"You can add items to your fridge in the Food Shop! :D\n";
+            }
+
             for(const Food* element:this->fridge)
                 cout<<*element;
+            cout<<"Press any number to return to Main!\n\n\n";
+            int x;
+            cin>>x;
+        }
+        void show_food_shop()
+        {
+            Food mancare1("cake",40,20,7);
+            this->food_shop.push_back(&mancare1);
+            Food mancare2("soup",15,16,-3);
+            this->food_shop.push_back(&mancare2);
+            Food mancare3("sushi",23,8,5);
+            this->food_shop.push_back(&mancare3);
+            Food mancare4("egg",5,5,1);
+            this->food_shop.push_back(&mancare4);
+            Food mancare5("asparagus",38,18,9);
+            this->food_shop.push_back(&mancare5);
+            Food mancare6("water",5,10,5);
+            this->food_shop.push_back(&mancare6);
+            int c=0;
+            for(auto const element: food_shop)
+            {
+
+                cout<<"item "<<c<<": ";
+                cout<<element->get_name_food()<<"\n";
+                cout<<element->get_name_food()<<" costs "<<element->get_cost()<<" pou money, increases satiety by "<<element->get_hunger_inc()<<"%\n";
+
+                c++;
+            }
+            cout<<"Be careful! "<<this->name<<" may not like any food!\n";
+            int nr2=1;
+            while(nr2==1) {
+                cout << "\nPress the number of the item you would like to buy.\n\n\n";
+                int nr;
+                cin >> nr;
+                cout << "You have selected " << food_shop[nr]->get_name_food() << "\nAre you sure?\nPress 1 for yes, 2 for no.\n";
+                cin >> nr2;
+                if (nr2 == 1) {
+                    this->add_to_fridge(food_shop[nr]);
+                    this->money_Pou -= food_shop[nr]->get_cost();
+                    cout << "-" << food_shop[nr]->get_cost() << " pou money\n";
+                    //cout<<"you have "<<this->money_Pou<<" pou money left."
+                    cout << "Would you like to buy something else? :D\nPress 1 for yes, 2 for no.\n";
+                    cin>>nr2;
+                }
+                else
+                {
+                    cout<<"wow so you're just gonna let "<<this->name<<" starve?\n";
+                }
+
+            }
+
+
+
+
+        }
+        void interfata()
+        {
+            int x=1;
+            while(x!=4)
+            {
+                cout<<"\n\nPress 1 to go to Food Shop!\n";
+                cout<<"Press 2 to go to Fridge!\n";
+                cout<<"Press 3 to see your Bank Account!\n";
+                cout<<"Press 4 to exit the game and abandon your child\n\n\n";
+
+                cin>>x;
+                if(x==1)
+                {
+
+                    show_food_shop();
+                    cout<<"Press any number to return to Main! :D\n\n\n";
+                    int x;
+                    cin>>x;
+                }
+
+                else if(x==2)
+                    this->show_fridge();
+
+                else if(x==3)
+                {
+                    cout << this->name << " has " << this->money_Pou << " pou money.\n";
+                    if (this->money_Pou > 90)
+                        cout << "damn ur a bit too rich how abt giving to the poor\n";
+                    cout<<"Press any number to return to Main!\n\n\n";
+                    int x;
+                    cin>>x;
+                }
+
+            }
         }
 
 

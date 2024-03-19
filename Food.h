@@ -33,6 +33,18 @@ class Food
     {
             return this->name;
     }
+    unsigned int get_cost() const //m a pus sa fac functia const ca altfel nu i placea
+    {
+            return this->cost;
+    }
+    int get_health_effect() const
+    {
+            return this->health_effect;
+    }
+    unsigned int get_hunger_inc() const
+    {
+            return this->hunger_increase;
+    }
 
 };
 //ostream& operator<<(ostream& os, const Food& x)
