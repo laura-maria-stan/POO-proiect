@@ -1,13 +1,18 @@
 #include <iostream>
 #include <array>
 
-#include <Helper.h>
+using namespace std;
+
+//#include <Helper.h>
+//my additions:
+#include "Pou.h"
+class Pou;
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
+//    std::cout << "Hello, world!\n";
+//    std::array<int, 100> v{};
+//    int nr;
+//    std::cout << "Introduceti nr: ";
     /////////////////////////////////////////////////////////////////////////
     /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
     /// dați exemple de date de intrare folosind fișierul tastatura.txt
@@ -28,17 +33,17 @@ int main() {
     /// program care merg (și să le evitați pe cele care nu merg).
     ///
     /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
+//    std::cin >> nr;
+//    /////////////////////////////////////////////////////////////////////////
+//    for(int i = 0; i < nr; ++i) {
+//        std::cout << "v[" << i << "] = ";
+//        std::cin >> v[i];
+//    }
+//    std::cout << "\n\n";
+//    std::cout << "Am citit de la tastatura " << nr << " elemente:\n";
+//    for(int i = 0; i < nr; ++i) {
+//        std::cout << "- " << v[i] << "\n";
+//    }
     ///////////////////////////////////////////////////////////////////////////
     /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
     /// alt fișier propriu cu ce alt nume doriți.
@@ -50,8 +55,18 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////
     ///                Exemplu de utilizare cod generat                     ///
     ///////////////////////////////////////////////////////////////////////////
-    Helper helper;
-    helper.help();
+//    Helper helper;
+//    helper.help();
     ///////////////////////////////////////////////////////////////////////////
+    
+    //my additions:
+    Pou pou_baby("Echinoctiu");
+    cout<<pou_baby;
+    
+    
+    
+    
+    
+    
     return 0;
 }
