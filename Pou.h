@@ -28,7 +28,7 @@ class Pou
         vector <const Food*> fridge; //aici o sa am un vector de pointeri care pointeaza catre obiecte Food
         //vectorul e automat gol
     public:
-        Pou(string name_parameter):
+        Pou(const string name_parameter):
         name(name_parameter) //lista de initializare
         {
             age=0;
@@ -71,6 +71,7 @@ class Pou
 
                 this->fridge.push_back(ptr_copie_food);
             }
+            return *this;
         }
         ~Pou()
         {

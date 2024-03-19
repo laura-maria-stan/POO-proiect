@@ -26,6 +26,7 @@ class Food
     friend ostream& operator<<(ostream& os, const Food& x)
     {
         os<<x.name<<" has "<<x.health_effect<<"% health effect, increases satiety by "<<x.hunger_increase<<"% and costs "<<x.cost;
+        return os;
     }
     //le am mutat inauntru ca altfel nu mergea
 };
