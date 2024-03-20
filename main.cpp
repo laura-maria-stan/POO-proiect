@@ -64,8 +64,10 @@ int main() {
     //my additions:
     string name_pou;
     cout<<"What what would you like to name your Pou?\n";
-    f>>name_pou;
+    cin>>name_pou;
     cout<<name_pou<<"\n";
+//    cout<<"    ____     \n";
+//    cout<<"   /    \     \n";
     cout<<"weird name but okey\n";
 
     Pou pou_baby(name_pou);
