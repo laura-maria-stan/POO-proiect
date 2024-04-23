@@ -10,6 +10,16 @@ std::ifstream f("tastatura.txt");
 #include "Pou.h"
 //class Pou;
 
+class MyCustomException : public std::exception{
+private:
+    int flag;
+public:
+    explicit MyCustomException(int flag_) : flag(flag_) {}
+     const char * what() const noexcept
+    {
+        return "O exceptie custom \n";
+    }
+};
 int main() {
 //    std::cout << "Hello, world!\n";
 //    std::array<int, 100> v{};
@@ -60,18 +70,46 @@ int main() {
 //    Helper helper;
 //    helper.help();
     ///////////////////////////////////////////////////////////////////////////
-    
+
     //my additions:
     string name_pou;
-    cout<<"What what would you like to name your Pou?\n";
-    cin>>name_pou;
-    cout<<name_pou<<"\n";
-//    cout<<"    ____     \n";
-//    cout<<"   /    \     \n";
+    int OK=0;
+    while(OK==0)
+    {
+        OK=1;
+        cout<<"What what would you like to name your Pou?\n";
+        try{
+            cin>>name_pou;
+            string sub="!?@#$%^&*()_-+=|}][{':;/>.<,~`";
+
+            for(int i=0;i<sub.size();i++)
+            {
+                if(name_pou.find(sub[i])!=0)
+                {
+                    OK=0;
+                }
+            }
+            if(OK==0)
+            {
+                throw(MyCustomException(0));
+            }
+        }
+        catch(MyCustomException &e)
+        {
+            std::cout<<"Pou can only have letters and numbers in his name, try again\n";
+            e.what();
+        }
+    }
+
+
+
+
     cout<<"weird name but okey\n";
 
+
+
     Pou pou_baby(name_pou);
-    pou_baby.interfata();
+    pou_baby.interfata_main();
 
 
     //Food asparagus("asparagus", 13, 10, 2); //aici am folosit constructorul de initializare!

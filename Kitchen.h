@@ -10,15 +10,18 @@ class Kitchen : public Room
 {
     std::vector <const Food*> fridge; //aici am un std::vector de pointeri care pointeaza catre obiecte Food
     //std::vectorul e automat gol
-    std::vector <const Food*> food_shop;
+    static std::vector <const Food*> food_shop;
 
-        virtual void Central_Object() override
+
+
+
+    void Central_Object() override
     {
             cout<<"food\n";
     }
 
 
-    virtual void Left_Corner_Object() override
+    void Left_Corner_Object() override
     {
         if(this->fridge.size()==0)
         {
@@ -62,7 +65,7 @@ class Kitchen : public Room
 
 
 
-    void add_to_fridge( const Food *some_food)
+    void add_to_fridge(const Food *some_food)
     {
         this->fridge.push_back(some_food); //fridge e std::vector de pointers
         std::cout<<"\n"<<some_food->get_name_food()<<" has been added to the fridge!\n";
@@ -100,7 +103,7 @@ class Kitchen : public Room
                 std::cout << "You have selected " << food_shop[nr]->get_name_food() << "\nAre you sure?\nPress 1 for yes, 2 for no.\n";
                 std::cin >> nr2;
                 if (nr2 == 1) {
-                    const Food* copy(food_shop[nr]);
+                    //const Food* copy(food_shop[nr]);
                     this->add_to_fridge(food_shop[nr]);
                     //this->money_Pou -= food_shop[nr]->get_cost();
                     //GET BACK TO THIS GETTER MONEY POU
@@ -117,22 +120,55 @@ class Kitchen : public Room
 
     }
 public:
-    void create_food_shop()
+    Kitchen(): Room() //I put it here cause inside it doesn't work //for future me-it's an initialiser list
+    {
+    }
+
+    ~Kitchen() //destructor
+    {
+        for(const Food* elem: fridge)
+        {
+            delete elem;
+        }
+    }
+    Kitchen(Kitchen const &obj):Room() //copy constr
+    {
+
+        for(const Food* elem: obj.fridge)
+        {
+            Food *copy_pointer=new Food(*elem);
+            this->fridge.push_back(copy_pointer);
+        }
+
+    }
+    Kitchen& operator= (const Kitchen& y)
+    {
+        for(const Food* elem: this->fridge)
+            delete elem;
+        for(const Food* elem: y.fridge)
+        {
+            const Food *ptr=new Food(*elem);
+            this->fridge.push_back(ptr);
+        }
+    }
+
+
+    static void create_food_shop()
     {
         Food *mancare1=new Food("cake",40,20,7);
-        this->food_shop.push_back(mancare1);
+        food_shop.push_back(mancare1); //when i have static function i cant use this-> anymore
         Food *mancare2=new Food("soup",15,16,-3);
-        this->food_shop.push_back(mancare2);
+        food_shop.push_back(mancare2);
         Food *mancare3=new Food("sushi",23,8,5);
-        this->food_shop.push_back(mancare3);
+        food_shop.push_back(mancare3);
         Food *mancare4=new Food("egg",5,5,1);
-        this->food_shop.push_back(mancare4);
+        food_shop.push_back(mancare4);
         Food *mancare5=new Food("asparagus",38,18,9);
-        this->food_shop.push_back(mancare5);
+        food_shop.push_back(mancare5);
         Food *mancare6=new Food("water",5,10,5);
-        this->food_shop.push_back(mancare6);
+        food_shop.push_back(mancare6);
     }
-     void interfata_kitchen()
+     void interfata() override
     {
         int y=1;
         while(y!=3)
@@ -149,6 +185,10 @@ public:
             {
                 Left_Corner_Object();
             }
+            if(y==2)
+            {
+                Right_Corner_Shop();
+            }
 
 
         }
@@ -156,6 +196,8 @@ public:
 
     }
 };
+
+vector <const Food*> Kitchen::food_shop={};
 
 
 

@@ -100,6 +100,8 @@ add_executable(${PROJECT_NAME} main.cpp
         Bathroom.h
         Kitchen.cpp
         Kitchen.h
+        Clothing.cpp
+        Clothing.h
 )
 
 ###############################################################################

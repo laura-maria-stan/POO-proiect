@@ -17,26 +17,33 @@
 //asta face referinta spre clasa status
 #include "Food.h"
 #include "Kitchen.h"
-
+#include "Bathroom.h"
+#include "Bedroom.h"
 
 class Pou
 {
     private:
+    //here we just say the names we dont give values
         string name;
         int age;
         string size;
         Status general_status; //status e o clasa la care facem ref mai sus
         int money_Pou;
-        Kitchen kitchen;
+        Room* kitchen; //in the constr i initialize it
+        Room* bathroom;
+        Room* bedroom;
 
 
     public:
-        Pou(const string name_parameter):
-        name(name_parameter) //lista de initializare
+        Pou(const string &name_parameter):
+        name(name_parameter), age(0) //lista de initializare
         {
-            age=0;
             size="baby!";
             money_Pou=100;
+            kitchen=new Kitchen; //i had to initialize it here bcs u cant u initialize dynamically when u declare the value in the class
+            bathroom=new Bathroom;
+            bedroom=new Bedroom;
+
 
         }
         Pou(Pou const &obj) //copy constr
@@ -50,6 +57,8 @@ class Pou
 //            {
 //                Food *ptr_copie_food= new Food(*elem); //new Food(*elem) apeleaza constructorul de copiere de la Food si creeaza un nou obiect la fel ca val la care pointeaza elem
 //                //si returneaza in ptr un pointer catre aceasta copie.
+                  // new Food(*elem) aka the copy constr from Food duplicates *elem. that way
+                  // him and *ptr dont point to the same objects, but diff objects that have the same values
 //                //(era gresit daca ziceam doar this->fridge.push_back(elem);) ca copia pointerii si aveam doi pointeri aratand spre aceleasi val deci cand se modif o val se modifica peste tot
 //
 //                this->fridge.push_back(ptr_copie_food);
@@ -119,17 +128,25 @@ class Pou
 //            }
         }
 
-
-        void interfata()
+//        string getsizePou()
+//        {
+//            return this->size;
+//        }
+        void interfata_main()
         {
             int x=1;
-            kitchen.create_food_shop();
+            dynamic_cast<Kitchen*>(kitchen)->create_food_shop();
             //i create the food shop ONCE in the interfata
+            int ok=1;
             while(x!=5)
             {
                 //cout<<"\n\nPress 1 to go to Food Shop!\n";
-                cout<<"Welcome to "<<this->name<<"'s house!\n";
-                cout<<"Press 1 to go to the Kitchen!\n";
+                if(ok==1)
+                {
+                    cout<<"\nWelcome to "<<this->name<<"'s house!\n\n";
+                    ok=0;
+                }
+                cout<<"\nPress 1 to go to the Kitchen!\n";
                 cout<<"Press 2 to go to the Bathroom!\n";
                 cout<<"Press 3 to go the Bedroom\n";
                 cout<<"Press 4 to see your Bank Account!\n";
@@ -139,13 +156,19 @@ class Pou
                 if(x==1)
                 {
 
-                    kitchen.interfata_kitchen();
+                    kitchen->interfata(); //de intrebat: daca functia era protected in room, nu ma lasa sa fie publica in kitchen
                     //I call the function using the Kitchen class obj "kitchen";
 
                 }
-
-
+                else if(x==2)
+                {
+                    bathroom->interfata();
+                }
                 else if(x==3)
+                {
+                    bedroom->interfata();
+                }
+                else if(x==4)
                 {
                     cout << this->name << " has " << this->money_Pou << " pou money.\n";
 //                    if (this->money_Pou > 90)
@@ -153,9 +176,22 @@ class Pou
                     if (this->money_Pou <0)
                         cout << "lmao brokie\n";
                     cout<<"Press any number to return to Main!\n\n\n";
-                    int x;
-                    cin>>x;
+
                 }
+                else
+                {
+                    try{
+                        throw std::invalid_argument("NO");
+                    }
+                    catch(std::invalid_argument &e)
+                    {
+                        cout<<"Invalid number, try again\n";
+                    }
+                }
+
+
+
+
 
             }
         }
