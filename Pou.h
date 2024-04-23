@@ -178,7 +178,7 @@ class Pou
                     cout<<"Press any number to return to Main!\n\n\n";
 
                 }
-                else
+                else if(x!=5)
                 {
                     try{
                         throw std::invalid_argument("NO");
