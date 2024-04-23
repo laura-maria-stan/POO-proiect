@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <cstring>
+
 using namespace std;
 
 #ifndef POO_STATUS_H
@@ -16,17 +17,17 @@ private:
     unsigned int happiness;
     unsigned int energy;
 public:
-    Status()
-    {
-        hunger=100;
-        health=100;
-        happiness=100;
-        energy=100;
+    Status() {
+        hunger = 100;
+        health = 100;
+        happiness = 100;
+        energy = 100;
 
     }
-    friend ostream& operator<< (ostream& os,const Status& x)
-    {
-        os<< "\nPou has "<<x.happiness<<"% happiness, "<<x.health<<"% health, "<<x.hunger<<"% satiety, "<<x.energy<<"% energy left.";
+
+    friend ostream &operator<<(ostream &os, const Status &x) {
+        os << "\nPou has " << x.happiness << "% happiness, " << x.health << "% health, " << x.hunger << "% satiety, "
+           << x.energy << "% energy left.";
         return os;
     }
 
