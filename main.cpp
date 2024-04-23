@@ -3,8 +3,8 @@
 #include <fstream>
 #include <vector>
 
-using namespace std;
-ifstream f("tastatura.txt");
+//using namespace std;
+std::ifstream f("tastatura.txt");
 //#include <Helper.h>
 //my additions:
 #include "Pou.h"
