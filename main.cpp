@@ -84,7 +84,7 @@ int main() {
 
             for(int i=0;i<sub.size();i++)
             {
-                if(name_pou.find(sub[i])!=0)
+                if(name_pou.find(sub[i])!=std::string::npos)
                 {
                     OK=0;
                 }
@@ -92,6 +92,7 @@ int main() {
             if(OK==0)
             {
                 throw(MyCustomException(0));
+
             }
         }
         catch(MyCustomException &e)
