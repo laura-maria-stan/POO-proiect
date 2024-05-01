@@ -6,11 +6,13 @@
 #define POO_POU_BEDROOM_H
 
 #include "Room.h"
+#include "Clothing.h"
 
 class Bedroom : public Room {
 
-    vector<string> pou_closet;
-    static vector<string> pou_clothing_shop;
+    vector<const Clothing*> pou_closet;//aici am un std::vector de pointeri care pointeaza catre obiecte Food
+    //std::vectorul e automat gol
+    static vector<const Clothing*> pou_clothing_shop;
 
     void Central_Object() override {
         //lamp
@@ -24,10 +26,32 @@ class Bedroom : public Room {
     void Left_Corner_Object() override {
         //Pou's closet
         cout << "Welcome to Pou's closet!\n";
-        cout << "\nPou is just a baby, he is not allowed near such dangerous objects (the clothes)!\n"
-                "Wait till Pou gets bigger!\n\n\n";
+        int cc=0;
+        if(this->pou_closet.size()==0)
+            {cout<<"Pou doesnt have any clothes! He's like.. super poor!\n";
+            cout<<"If you want to buy Pou some clothes, press 1 to reach the scaryyyy pou clothing shop!\n";
+            int y;
+            cin>>y;
+            if(y==1)
+            {
+                cout<<"BOO!\n";
+                cout<<"Just kidding, this is a normal clothing shop\n";
+                show_clothing_shop();
+            }
+            }
+
+
+        else
+            for(auto element:this->pou_closet)
+            {
+                cout<<element;
+                cc++;
+                cout<<"item "<<cc<<" from the closet is "<<element;
+            }
+
 
     }
+
 
     void Question_Mark(std::string text) override {
         cout << "The bedroom is the place where Pou rests!\n"
@@ -39,6 +63,22 @@ class Bedroom : public Room {
     }
 
 public:
+    static void show_clothing_shop()
+    {
+        int cc=1;
+        for(auto const element:pou_clothing_shop)
+        {
+            std::cout<<"item "<<cc<<" in the shop is "<<element<<"\n";
+        }
+    }
+    void create_clothing_shop()
+    {
+        Clothing *cloth1= new Clothing("hat","red","purple",14);
+        Clothing *cloth2=new Clothing("jacket","green","yellow",30);
+        pou_clothing_shop.push_back(cloth1);
+        pou_clothing_shop.push_back(cloth2);
+    }
+
     Bedroom() = default;
 
     Bedroom(const Bedroom &obj) //copy constr
